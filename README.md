@@ -1,6 +1,8 @@
 # Task Tracker API
 
-A small REST API for managing tasks, built with FastAPI as the first step of a broader DevOps portfolio project (containerization, CI/CD, and cloud deployment coming in later stages).
+![CI](https://github.com/annatezelashvili/deploy-and-monitor/actions/workflows/ci.yml/badge.svg)
+
+A small REST API for managing tasks, built with FastAPI
 
 ## Features
 
@@ -26,7 +28,7 @@ Data is currently stored in memory (no database yet) — restarting the server r
 Clone the repo and set up a virtual environment:
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/annatezelashvili/deploy-and-monitor.git
 cd deploy-and-monitor
 python -m venv venv
 source venv/bin/activate   # on Windows: venv\Scripts\activate
