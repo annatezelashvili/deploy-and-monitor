@@ -19,6 +19,7 @@ Data is currently stored in memory (no database yet) — restarting the server r
 - Uvicorn (ASGI server)
 - Pydantic (data validation)
 - Docker
+- Pytest (testing)
 
 ## Getting Started
 
@@ -57,6 +58,20 @@ docker run -p 8000:8000 task-tracker
 
 The API will be available at `http://localhost:8000`, same as running it locally — `-p 8000:8000` maps the container's port to your machine's port.
 
+## Running Tests
+
+The project uses `pytest` with FastAPI's `TestClient` to test endpoints without needing a live server.
+
+```bash
+pytest -v
+```
+
+Current test coverage:
+- Health check returns `200`
+- Creating a task returns the created task
+- Deleting a task works, and returns `404` for a non-existent task
+- Listing tasks returns a list, and includes newly created tasks
+
 ## Example Usage
 
 Create a task:
@@ -72,15 +87,3 @@ List all tasks:
 ```bash
 curl http://localhost:8000/tasks
 ```
-
-## Roadmap
-
-This project is being built incrementally as part of a structured learning plan:
-
-- [x] Week 1 — Python + FastAPI CRUD API
-- [x] Week 2 — Containerize with Docker (this stage)
-- [ ] Week 3 — CI/CD pipeline with GitHub Actions
-- [ ] Week 4 — Cloud deployment (AWS) + basic networking
-- [ ] Week 5 — Infrastructure as Code with Terraform
-- [ ] Week 6 — Monitoring and logging
-- [ ] Week 7 — Documentation and polish
