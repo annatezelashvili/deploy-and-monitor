@@ -25,22 +25,22 @@ jobs:
       - run: docker build -t task-tracker .
 
   push:
-  runs-on: ubuntu-latest
-  needs: test
-  if: github.ref == 'refs/heads/main'
-  permissions:
-    contents: read
-    packages: write
-  steps:
-    - uses: actions/checkout@v4
-    - id: vars
-      run: echo "short_sha=$(echo ${{ github.sha }} | cut -c1-7)" >> "$GITHUB_OUTPUT"
-    - uses: docker/login-action@v3
-      with:
-        registry: ghcr.io
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-    - run: |
-        docker build -t ghcr.io/annatezelashvili/task-tracker:latest -t ghcr.io/annatezelashvili/task-tracker:${{ steps.vars.outputs.short_sha }} .
-        docker push ghcr.io/annatezelashvili/task-tracker:latest
-        docker push ghcr.io/annatezelashvili/task-tracker:${{ steps.vars.outputs.short_sha }}
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - id: vars
+        run: echo "short_sha=$(echo ${{ github.sha }} | cut -c1-7)" >> "$GITHUB_OUTPUT"
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - run: |
+          docker build -t ghcr.io/annatezelashvili/task-tracker:latest -t ghcr.io/annatezelashvili/task-tracker:${{ steps.vars.outputs.short_sha }} .
+          docker push ghcr.io/annatezelashvili/task-tracker:latest
+          docker push ghcr.io/annatezelashvili/task-tracker:${{ steps.vars.outputs.short_sha }}
